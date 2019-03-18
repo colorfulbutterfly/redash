@@ -81,7 +81,7 @@ export class Parameter {
   }
 
   clone() {
-    return new Parameter(this);
+    return new Parameter(this, this.parentQueryId);
   }
 
   get isEmpty() {
