@@ -206,6 +206,14 @@ export class Parameter {
     }
     return `{{ ${this.name} }}`;
   }
+
+  loadDropdownValues() {
+    if (this.parentQueryId) {
+      return Query.associatedDropdown({ queryId: this.parentQueryId, dropdownQueryId: this.queryId }).$promise;
+    }
+
+    return Query.asDropdown({ id: this.queryId }).$promise;
+  }
 }
 
 class Parameters {
