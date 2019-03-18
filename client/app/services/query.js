@@ -58,6 +58,11 @@ export class Parameter {
     this.global = parameter.global; // backward compatibility in Widget service
     this.enumOptions = parameter.enumOptions;
     this.queryId = parameter.queryId;
+
+    // ANGULAR_REMOVE_ME The whole purpose of carrying the parentQueryId within the Parameter class is that
+    // it is is difficult to correctly bind functions that fetch dropdownOptions and is cumbersome with Angular.
+    // Once Angular is a thing of the past, a proper Query function could be injected to the QueryBasedParameterInput
+    // component, which will fetch the dropdown options and the parentQueryId could be removed from Parameter.
     this.parentQueryId = parentQueryId;
 
     // Used for meta-parameters (i.e. dashboard-level params)
@@ -76,7 +81,7 @@ export class Parameter {
   }
 
   clone() {
-    return new Parameter(this);
+    return new Parameter(this, this.parentQueryId);
   }
 
   get isEmpty() {
